@@ -1,0 +1,35 @@
+debug_mode: "debug"
+time_location: "Asia/Chongqing"
+
+http:
+  addr: ":8200"
+  read_timeout: 10
+  write_timeout: 10
+  max_header_bytes: 20
+
+swagger:
+  title: "go_gateway swagger API"
+  desc: "This is a sample server celler server."
+  host: "127.0.0.1:8200"
+  base_path: ""
+
+mysql:
+  host: "localhost"
+  port: 3306
+  name: "gateway"
+  user: "root"
+  password: "123456"
+
+proxy:
+  addr: ":8300"
+  read_timeout: 10
+  write_timeout: 10
+  max_header_bytes: 20
+
+web:
+  url: "/pc"
+  path: "D:/workcode/big-screen/big-frontend/dist"
+  addr: ":8400"
+  read_timeout: 10
+  write_timeout: 10
+  max_header_bytes: 20
