@@ -1,0 +1,289 @@
+definitions:
+  models.HttpRule:
+    properties:
+      id:
+        type: integer
+      need_websocket:
+        type: integer
+      rule:
+        type: string
+      service_id:
+        type: integer
+      url_rewrite:
+        type: string
+    type: object
+  models.ServiceDetail:
+    properties:
+      http_rule:
+        $ref: '#/definitions/models.HttpRule'
+      info:
+        $ref: '#/definitions/models.ServiceInfo'
+    type: object
+  models.ServiceInfo:
+    properties:
+      create_at:
+        type: string
+      id:
+        type: integer
+      is_delete:
+        type: integer
+      service_desc:
+        type: string
+      service_name:
+        type: string
+      update_at:
+        type: string
+    type: object
+  public.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  schemas.ServiceAddHTTPInput:
+    properties:
+      need_websocket:
+        description: 是否支持websocket
+        example: 0
+        maximum: 1
+        minimum: 0
+        type: integer
+      rule:
+        description: 域名或者前缀
+        example: 类似/xxx/
+        type: string
+      service_desc:
+        description: 服务描述
+        maxLength: 255
+        minLength: 1
+        type: string
+      service_name:
+        description: 服务名
+        type: string
+      url_rewrite:
+        description: url重写功能
+        example: http://xx.xx.xx.xx:oo/
+        type: string
+    required:
+    - rule
+    - service_desc
+    - service_name
+    type: object
+  schemas.ServiceItemOutput:
+    properties:
+      id:
+        type: integer
+      service_addr:
+        type: string
+      service_desc:
+        type: string
+      service_name:
+        type: string
+      service_rewrite:
+        type: string
+    type: object
+  schemas.ServiceListOutput:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/schemas.ServiceItemOutput'
+        type: array
+      total:
+        type: integer
+    type: object
+  schemas.ServiceUpdateHTTPInput:
+    properties:
+      id:
+        description: 服务ID
+        example: 62
+        minimum: 1
+        type: integer
+      need_websocket:
+        description: 是否支持websocket
+        maximum: 1
+        minimum: 0
+        type: integer
+      rule:
+        description: "域名或者前缀 \t//启用strip_uri"
+        example: /test_http_service_indb
+        type: string
+      service_desc:
+        description: 服务描述
+        example: test_http_service_indb
+        maxLength: 255
+        minLength: 1
+        type: string
+      service_name:
+        description: 服务名
+        example: test_http_service_indb
+        type: string
+      url_rewrite:
+        description: header转换
+        type: string
+    required:
+    - id
+    - rule
+    - service_desc
+    - service_name
+    type: object
+info:
+  contact: {}
+paths:
+  /service/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除服务
+      operationId: /service/{id}
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除服务
+      tags:
+      - 服务管理接口
+    get:
+      consumes:
+      - application/json
+      description: 获取服务信息
+      operationId: /service/{id}
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.ServiceDetail'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取服务信息
+      tags:
+      - 服务管理接口
+  /service/list:
+    get:
+      consumes:
+      - application/json
+      description: 获取服务列表
+      operationId: /service/list
+      parameters:
+      - description: 关键词
+        in: query
+        name: info
+        type: string
+      - description: 页数
+        in: query
+        name: page_no
+        required: true
+        type: integer
+      - description: 每页条数
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/schemas.ServiceListOutput'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取服务列表
+      tags:
+      - 服务管理接口
+  /service/service_add_http:
+    post:
+      consumes:
+      - application/json
+      description: 添加HTTP服务
+      operationId: /service/service_add_http
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.ServiceAddHTTPInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 添加HTTP服务
+      tags:
+      - 服务管理接口
+  /service/service_update_http:
+    post:
+      consumes:
+      - application/json
+      description: 修改HTTP服务
+      operationId: /service/service_update_http
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.ServiceUpdateHTTPInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 修改HTTP服务
+      tags:
+      - 服务管理接口
+swagger: "2.0"
