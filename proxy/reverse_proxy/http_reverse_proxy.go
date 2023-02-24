@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func NewReverseProxy(c *gin.Context, serviceDetail *models.ServiceDetail) *httputil.ReverseProxy {
+func NewHttpReverseProxy(c *gin.Context, serviceDetail *models.ServiceDetail) *httputil.ReverseProxy {
 	//请求协调者
 	director := func(req *http.Request) {
 		nextAddr := serviceDetail.HTTPRule.UrlRewrite
