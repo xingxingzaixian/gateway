@@ -43,12 +43,22 @@ type HttpInfo struct {
 	MaxHeaderBytes int    `mapstructure:"max_header_bytes"`
 }
 
+type HttpsInfo struct {
+	Addr           string `mapstructure:"addr"`
+	ReadTimeout    int    `mapstructure:"read_timeout"`
+	WriteTimeout   int    `mapstructure:"write_timeout"`
+	MaxHeaderBytes int    `mapstructure:"max_header_bytes"`
+}
+
 type Config struct {
 	DebugMode    string      `mapstructure:"debug_mode"`
 	TimeLocation string      `mapstructure:"time_location"`
+	Salt         string      `mapstructure:"salt"`
+	JwtSignKey   string      `mapstructure:"sign-key"`
 	Swagger      SwaggerInfo `mapstructure:"swagger"`
 	Mysql        MysqlInfo   `mapstructure:"mysql"`
-	Proxy        ProxyInfo   `mapstructure:"proxy"`
+	ProxyHttp    ProxyInfo   `mapstructure:"proxy.http"`
+	ProxyHttps   ProxyInfo   `mapstructure:"proxy.https"`
 	Web          WebInfo     `mapstructure:"web"`
 	Http         HttpInfo    `mapstructure:"http"`
 }

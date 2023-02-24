@@ -42,6 +42,61 @@ definitions:
       message:
         type: string
     type: object
+  schemas.AdminInfoOutput:
+    properties:
+      id:
+        type: integer
+      login_time:
+        type: string
+      name:
+        type: string
+    type: object
+  schemas.AdminLoginInput:
+    properties:
+      password:
+        example: "123456"
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  schemas.AdminLoginOutput:
+    properties:
+      token:
+        example: token
+        type: string
+    type: object
+  schemas.AdminRegisterInput:
+    properties:
+      password:
+        example: "123456"
+        type: string
+      salt:
+        example: asdfas
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - password
+    - salt
+    - username
+    type: object
+  schemas.ChangPwdInput:
+    properties:
+      new_pass:
+        example: "123456"
+        type: string
+      password:
+        example: "123456"
+        type: string
+    required:
+    - new_pass
+    - password
+    type: object
   schemas.ServiceAddHTTPInput:
     properties:
       need_websocket:
@@ -131,6 +186,144 @@ definitions:
 info:
   contact: {}
 paths:
+  /admin/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 删除用户
+      operationId: /admin/{id}
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除用户
+      tags:
+      - 管理员接口
+  /admin/change_pwd:
+    post:
+      consumes:
+      - application/json
+      description: 修改密码
+      operationId: /admin/change_pwd
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.ChangPwdInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 修改密码
+      tags:
+      - 管理员接口
+  /admin/info:
+    get:
+      consumes:
+      - application/json
+      description: 管理员信息
+      operationId: /admin/info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/schemas.AdminInfoOutput'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 管理员信息
+      tags:
+      - 管理员接口
+  /admin_login/login:
+    post:
+      consumes:
+      - application/json
+      description: 管理员登录
+      operationId: /admin_login/login
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.AdminLoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/schemas.AdminLoginOutput'
+              type: object
+      summary: 管理员登录
+      tags:
+      - 管理员接口
+  /admin_login/register:
+    post:
+      consumes:
+      - application/json
+      description: 管理员注册
+      operationId: /admin_login/register
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.AdminRegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/public.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/schemas.AdminRegisterInput'
+              type: object
+      summary: 管理员注册
+      tags:
+      - 管理员接口
   /service/{id}:
     delete:
       consumes:

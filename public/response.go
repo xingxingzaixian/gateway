@@ -31,9 +31,44 @@ const (
 	ServiceListParamInvalid = 1001 + iota
 	ServiceListPageList
 	ServiceListServiceDetail
+	ServiceDetailParamInvalid
+	ServiceDetailGetInfoError
+	ServiceDetailDataError
+	ServiceDeleteParamInvalid
+	ServiceDeleteGetInfoError
+	ServiceDeleteSaveError
+	ServiceAddHTTPParamInvalid
+	ServiceAddHTTPGetInfoError
+	ServiceAddHTTPHttpUrlError
+	ServiceAddHTTPSaveError
+	ServiceAddHTTPRuleSaveError
+	ServiceUpdateHTTPParamInvalid
+	ServiceUpdateHTTPGetInfoError
+	ServiceUpdateHTTPNotExist
+	ServiceUpdateHTTPSaveError
+	ServiceUpdateHTTPRuleSaveError
 )
 
 const (
 	MiddleAccessMode = 601 + iota
 	MiddleReverseProxy
+	MiddleUserNotExist
+)
+
+const (
+	AdminChangePwdParamInvalid = 2001 + iota
+	AdminPasswordError
+	AdminChangePwdError
+	AdminDeleteParamInvalid
+	AdminUserNotExist
+	AdminDeleteUserError
+)
+
+const (
+	AdminLoginParamInvalid = 3001 + iota
+	AdminLoginUserOrPwdError
+	AdminLoginCreateTokenError
+	AdminRegisterParamInvalid
+	AdminRegisterUserNotExist
+	AdminRegisterCreateUserError
 )

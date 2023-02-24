@@ -4,6 +4,7 @@ import (
 	"gateway/docs"
 	"gateway/lib/config"
 	"gateway/service/api"
+	"gateway/service/middleware"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -29,6 +30,17 @@ func InitRouter(middlewares ...gin.HandlerFunc) *gin.Engine {
 	serviceRouter := router.Group("/service")
 	{
 		api.ServiceRegister(serviceRouter)
+	}
+
+	adminLoginRouter := router.Group("/admin_login")
+	{
+		api.AdminLoginRegister(adminLoginRouter)
+	}
+
+	adminRouter := router.Group("/admin")
+	adminRouter.Use(middleware.JwtAuth())
+	{
+		api.AdminRegister(adminRouter)
 	}
 	return router
 }

@@ -1,5 +1,7 @@
 debug_mode: "debug"
 time_location: "Asia/Chongqing"
+salt: "dga32gw4wfw4e454fdga34"
+sign-key: "my_sign_key"
 
 http:
   addr: ":8200"
@@ -21,10 +23,17 @@ mysql:
   password: "123456"
 
 proxy:
-  addr: ":8300"
-  read_timeout: 10
-  write_timeout: 10
-  max_header_bytes: 20
+  http:
+    addr: ":8300"
+    read_timeout: 10
+    write_timeout: 10
+    max_header_bytes: 20
+
+  https:
+    addr: ":8443"
+    read_timeout: 10
+    write_timeout: 10
+    max_header_bytes: 20
 
 web:
   url: "/pc"

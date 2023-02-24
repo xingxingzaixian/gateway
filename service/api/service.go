@@ -86,19 +86,19 @@ func (s *ServiceApi) ServiceDetail(ctx *gin.Context) {
 	id := ctx.Param("id")
 	serviceId, err := strconv.Atoi(id)
 	if err != nil {
-		public.ResponseError(ctx, 400, errors.New("ID为必填字段"))
+		public.ResponseError(ctx, public.ServiceDetailParamInvalid, errors.New("ID为必填字段"))
 		return
 	}
 
 	serviceInfo := &models.ServiceInfo{ID: int64(serviceId)}
 	serviceInfo, err = serviceInfo.Find(ctx, public.GormDB, serviceInfo)
 	if err != nil {
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceDetailGetInfoError, err)
 		return
 	}
 	serviceDetail, err := serviceInfo.ServiceDetail(ctx, public.GormDB, serviceInfo)
 	if err != nil {
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceDetailDataError, err)
 		return
 	}
 
@@ -120,19 +120,19 @@ func (s *ServiceApi) ServiceDelete(ctx *gin.Context) {
 	id := ctx.Param("id")
 	serviceId, err := strconv.Atoi(id)
 	if err != nil {
-		public.ResponseError(ctx, 400, errors.New("ID为必填字段"))
+		public.ResponseError(ctx, public.ServiceDeleteParamInvalid, errors.New("ID为必填字段"))
 		return
 	}
 
 	serviceInfo := &models.ServiceInfo{ID: int64(serviceId)}
 	serviceInfo, err = serviceInfo.Find(ctx, public.GormDB, serviceInfo)
 	if err != nil {
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceDeleteGetInfoError, err)
 		return
 	}
 	serviceInfo.IsDelete = 1
 	if err = serviceInfo.Save(ctx, public.GormDB); err != nil {
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceDeleteSaveError, err)
 		return
 	}
 
@@ -155,7 +155,7 @@ func (s *ServiceApi) ServiceDelete(ctx *gin.Context) {
 func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 	params := &schemas.ServiceAddHTTPInput{}
 	if err := params.BindValidParam(ctx); err != nil {
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceAddHTTPParamInvalid, err)
 		return
 	}
 
@@ -165,14 +165,14 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 	serviceInfo, err := serviceInfo.Find(ctx, tx, serviceInfo)
 	if err == nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 2002, errors.New("服务已存在"))
+		public.ResponseError(ctx, public.ServiceAddHTTPGetInfoError, errors.New("服务已存在"))
 		return
 	}
 
 	httUrl := &models.HttpRule{Rule: params.Rule, NeedWebsocket: 0, UrlRewrite: params.UrlRewrite}
 	if _, err = httUrl.Find(ctx, tx, httUrl); err == nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, errors.New("服务已存在"))
+		public.ResponseError(ctx, public.ServiceAddHTTPHttpUrlError, errors.New("服务已存在"))
 		return
 	}
 
@@ -182,7 +182,7 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 	}
 	if err := serviceModel.Save(ctx, tx); err != nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceAddHTTPSaveError, err)
 		return
 	}
 
@@ -195,7 +195,7 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 
 	if err := httpRule.Save(ctx, tx); err != nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceAddHTTPRuleSaveError, err)
 		return
 	}
 
@@ -223,7 +223,7 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 	params := &schemas.ServiceUpdateHTTPInput{}
 	if err := params.BindValidParam(ctx); err != nil {
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceUpdateHTTPParamInvalid, err)
 		return
 	}
 
@@ -233,14 +233,14 @@ func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 	serviceInfo, err := serviceInfo.Find(ctx, tx, serviceInfo)
 	if err != nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, errors.New("服务不存在"))
+		public.ResponseError(ctx, public.ServiceUpdateHTTPGetInfoError, errors.New("服务不存在"))
 		return
 	}
 
 	serviceDetail, err := serviceInfo.ServiceDetail(ctx, tx, serviceInfo)
 	if err != nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, errors.New("服务不存在"))
+		public.ResponseError(ctx, public.ServiceUpdateHTTPNotExist, errors.New("服务不存在"))
 		return
 	}
 
@@ -248,7 +248,7 @@ func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 	info.ServiceDesc = params.ServiceDesc
 	if err := info.Save(ctx, tx); err != nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceUpdateHTTPSaveError, err)
 		return
 	}
 
@@ -257,7 +257,7 @@ func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 	httpRule.UrlRewrite = params.UrlRewrite
 	if err := httpRule.Save(ctx, tx); err != nil {
 		tx.Rollback()
-		public.ResponseError(ctx, 400, err)
+		public.ResponseError(ctx, public.ServiceUpdateHTTPRuleSaveError, err)
 		return
 	}
 	tx.Commit()

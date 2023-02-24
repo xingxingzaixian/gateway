@@ -249,3 +249,11 @@
 {"level":"INFO","ts":"2023-02-23T17:42:02.499+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
 {"level":"INFO","ts":"2023-02-23T17:42:02.524+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
 {"level":"INFO","ts":"2023-02-23T17:42:09.807+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T15:30:58.106+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T15:30:58.113+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T15:30:58.135+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T15:31:21.143+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T17:06:20.225+0800","caller":"config/config.go:78","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T17:06:20.249+0800","caller":"config/config.go:79","msg":"配置信息：{debug Asia/Chongqing dga32gw4wfw4e454fdga34 my_sign_key {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} { 0 0 0} { 0 0 0} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T17:06:20.274+0800","caller":"http_proxy_router/httpserver.go:30","msg":" [INFO] http_proxy_run \n"}
+{"level":"INFO","ts":"2023-02-24T17:39:12.304+0800","caller":"http_proxy_router/httpserver.go:42","msg":" [INFO] http_proxy_stop  stopped\n"}

@@ -40,11 +40,15 @@ func main() {
 			http_proxy_router.HttpServerRun()
 		}()
 
+		go func() {
+			http_proxy_router.HttpsServerRun()
+		}()
 		quit := make(chan os.Signal)
 		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 		<-quit
 
 		http_proxy_router.HttpServerStop()
+		http_proxy_router.HttpsServerStop()
 		router.HttpServerStop()
 	} else if *endpoint == "static" {
 		web.HttpServerRun()
