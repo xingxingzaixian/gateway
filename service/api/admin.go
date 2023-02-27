@@ -25,7 +25,6 @@ func AdminRegister(group *gin.RouterGroup) {
 // @Tags 管理员接口
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Success 200 {object} public.Response{data=schemas.AdminInfoOutput} "success"
 // @Router /admin/info [get]
 func (a *AdminApi) AdminInfo(ctx *gin.Context) {
@@ -45,7 +44,6 @@ func (a *AdminApi) AdminInfo(ctx *gin.Context) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param data body schemas.ChangPwdInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /admin/change_pwd [post]
@@ -81,7 +79,6 @@ func (a *AdminApi) ChangePwd(ctx *gin.Context) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param id  path int true "Account ID"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /admin/{id} [delete]

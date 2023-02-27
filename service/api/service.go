@@ -27,7 +27,6 @@ func ServiceRegister(group *gin.RouterGroup) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param info query string false "关键词"
 // @Param page_no query int true "页数"
 // @Param page_size query int true "每页条数"
@@ -78,7 +77,6 @@ func (s *ServiceApi) ServiceList(ctx *gin.Context) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param id path int true "ID"
 // @Success 200 {object} public.Response{data=models.ServiceDetail} "success"
 // @Router /service/{id} [get]
@@ -112,7 +110,6 @@ func (s *ServiceApi) ServiceDetail(ctx *gin.Context) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param id path int true "ID"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /service/{id} [delete]
@@ -148,7 +145,6 @@ func (s *ServiceApi) ServiceDelete(ctx *gin.Context) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param data body schemas.ServiceAddHTTPInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /service/service_add_http [post]
@@ -216,7 +212,6 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 // @Security ApiKeyAuth
 // @Accept application/json
 // @Produce application/json
-// @Param Authorization header string true "Bearer JWT"
 // @Param data body schemas.ServiceUpdateHTTPInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /service/service_update_http [post]
