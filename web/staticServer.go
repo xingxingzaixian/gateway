@@ -3,8 +3,8 @@ package web
 import (
 	"gateway/lib/config"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"golang.org/x/net/context"
-	"log"
 	"net/http"
 	"time"
 )
@@ -24,9 +24,9 @@ func HttpServerRun() {
 		MaxHeaderBytes: 1 << uint(config.BaseConfig.Web.MaxHeaderBytes),
 	}
 	go func() {
-		log.Printf(" [INFO] HttpStaticRun:%s\n", config.BaseConfig.Web.Addr)
+		zap.S().Infof(" [INFO] HttpStaticRun:%s\n", config.BaseConfig.Web.Addr)
 		if err := HttpStaticHandler.ListenAndServe(); err != nil {
-			log.Fatalf(" [ERROR] HttpStaticRun:%s err:%v\n", config.BaseConfig.Web.Addr, err)
+			zap.S().Fatalf(" [ERROR] HttpStaticRun:%s err:%v\n", config.BaseConfig.Web.Addr, err)
 		}
 	}()
 }
@@ -35,7 +35,7 @@ func HttpServerStop() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	if err := HttpStaticHandler.Shutdown(ctx); err != nil {
-		log.Fatalf(" [ERROR] HttpServerStop err:%v\n", err)
+		zap.S().Fatalf(" [ERROR] HttpServerStop err:%v\n", err)
 	}
-	log.Printf(" [INFO] HttpServerStop stopped\n")
+	zap.S().Infof(" [INFO] HttpServerStop stopped\n")
 }

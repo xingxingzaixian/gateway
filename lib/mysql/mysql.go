@@ -29,6 +29,6 @@ func InitMysql() {
 		zap.S().Fatalf("数据库连接失败：%s:%d", mysqlConfig.Host, mysqlConfig.Port)
 	}
 
-	db.AutoMigrate(&models.HttpRule{}, &models.ServiceInfo{})
+	db.AutoMigrate(&models.HttpRule{}, &models.ServiceInfo{}, &models.Admin{})
 	public.GormDB = db
 }

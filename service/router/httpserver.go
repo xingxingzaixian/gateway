@@ -4,8 +4,8 @@ import (
 	"gateway/lib/config"
 	"gateway/service/middleware"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"golang.org/x/net/context"
-	"log"
 	"net/http"
 	"time"
 )
@@ -25,9 +25,9 @@ func HttpServerRun() {
 		MaxHeaderBytes: 1 << uint(config.BaseConfig.Http.MaxHeaderBytes),
 	}
 	go func() {
-		log.Printf(" [INFO] HttpServerRun:%s\n", config.BaseConfig.Http.Addr)
+		zap.S().Infof(" [INFO] HttpServerRun:%s\n", config.BaseConfig.Http.Addr)
 		if err := HttpSrvHandler.ListenAndServe(); err != nil {
-			log.Fatalf(" [ERROR] HttpServerRun:%s err:%v\n", config.BaseConfig.Http.Addr, err)
+			zap.S().Fatalf(" [ERROR] HttpServerRun:%s err:%v\n", config.BaseConfig.Http.Addr, err)
 		}
 	}()
 }
@@ -36,7 +36,7 @@ func HttpServerStop() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	if err := HttpSrvHandler.Shutdown(ctx); err != nil {
-		log.Fatalf(" [ERROR] HttpServerStop err:%v\n", err)
+		zap.S().Fatalf(" [ERROR] HttpServerStop err:%v\n", err)
 	}
-	log.Printf(" [INFO] HttpServerStop stopped\n")
+	zap.S().Infof(" [INFO] HttpServerStop stopped\n")
 }

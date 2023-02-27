@@ -34,6 +34,8 @@ proxy:
     read_timeout: 10
     write_timeout: 10
     max_header_bytes: 20
+    cert_crt_file: "D:/OpenSourceCode/proxy/conf/server.crt"
+    cert_key_file: "D:/OpenSourceCode/proxy/conf/server.key"
 
 web:
   url: "/pc"

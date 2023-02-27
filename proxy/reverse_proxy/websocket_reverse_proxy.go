@@ -5,8 +5,8 @@ import (
 	"gateway/models"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
+	"go.uber.org/zap"
 	"io"
-	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -56,14 +56,14 @@ func NewWebsocketReverseProxy(c *gin.Context, serviceDetail *models.ServiceDetai
 
 func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if w.Backend == nil {
-		log.Println("websocketproxy: backend function is not defined")
+		zap.S().Info("websocketproxy: backend function is not defined")
 		http.Error(rw, "internal server error (code: 1)", http.StatusInternalServerError)
 		return
 	}
 
 	backendURL := w.Backend(req)
 	if backendURL == nil {
-		log.Println("websocketproxy: backend URL is nil")
+		zap.S().Info("websocketproxy: backend URL is nil")
 		http.Error(rw, "internal server error (code: 2)", http.StatusInternalServerError)
 		return
 	}
@@ -106,10 +106,10 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	connBackend, resp, err := dialer.Dial(backendURL.String(), requestHeader)
 	if err != nil {
-		log.Printf("websocketproxy: couldn't dial to remote backend url %s", err)
+		zap.S().Infof("websocketproxy: couldn't dial to remote backend url %s", err)
 		if resp != nil {
 			if err := copyResponse(rw, resp); err != nil {
-				log.Printf("websocketproxy: couldn't write response after failed remote backend handshake: %s", err)
+				zap.S().Infof("websocketproxy: couldn't write response after failed remote backend handshake: %s", err)
 			}
 		} else {
 			http.Error(rw, http.StatusText(http.StatusServiceUnavailable), http.StatusServiceUnavailable)
@@ -136,7 +136,7 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	// Also pass the header that we gathered from the Dial handshake.
 	connPub, err := upgrader.Upgrade(rw, req, upgradeHeader)
 	if err != nil {
-		log.Printf("websocketproxy: couldn't upgrade %s", err)
+		zap.S().Infof("websocketproxy: couldn't upgrade %s", err)
 		return
 	}
 	defer connPub.Close()
@@ -177,7 +177,7 @@ func (w *WebsocketProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	}
 	if e, ok := err.(*websocket.CloseError); !ok || e.Code == websocket.CloseAbnormalClosure {
-		log.Printf(message, err)
+		zap.S().Infof(message, err)
 	}
 }
 

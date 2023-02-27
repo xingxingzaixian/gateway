@@ -29,21 +29,7 @@ type MysqlInfo struct {
 	Password string `mapstructure:"password"`
 }
 
-type ProxyInfo struct {
-	Addr           string `mapstructure:"addr"`
-	ReadTimeout    int    `mapstructure:"read_timeout"`
-	WriteTimeout   int    `mapstructure:"write_timeout"`
-	MaxHeaderBytes int    `mapstructure:"max_header_bytes"`
-}
-
 type HttpInfo struct {
-	Addr           string `mapstructure:"addr"`
-	ReadTimeout    int    `mapstructure:"read_timeout"`
-	WriteTimeout   int    `mapstructure:"write_timeout"`
-	MaxHeaderBytes int    `mapstructure:"max_header_bytes"`
-}
-
-type HttpsInfo struct {
 	Addr           string `mapstructure:"addr"`
 	ReadTimeout    int    `mapstructure:"read_timeout"`
 	WriteTimeout   int    `mapstructure:"write_timeout"`
@@ -57,13 +43,14 @@ type Config struct {
 	JwtSignKey   string      `mapstructure:"sign-key"`
 	Swagger      SwaggerInfo `mapstructure:"swagger"`
 	Mysql        MysqlInfo   `mapstructure:"mysql"`
-	ProxyHttp    ProxyInfo   `mapstructure:"proxy.http"`
-	ProxyHttps   ProxyInfo   `mapstructure:"proxy.https"`
 	Web          WebInfo     `mapstructure:"web"`
 	Http         HttpInfo    `mapstructure:"http"`
 }
 
-var BaseConfig Config
+var (
+	BaseConfig Config
+	Conf       *viper.Viper
+)
 
 func InitConfig(configPath string) {
 	v := viper.New()
@@ -75,6 +62,15 @@ func InitConfig(configPath string) {
 	if err := v.Unmarshal(&BaseConfig); err != nil {
 		zap.S().Panicf("配置文件【%s】格式异常", configPath)
 	}
+	Conf = v
 	zap.S().Infof("配置文件【%s】读取成功", configPath)
 	zap.S().Infof("配置信息：%v", BaseConfig)
+}
+
+func GetStringConf(key string) string {
+	return Conf.GetString(key)
+}
+
+func GetIntConf(key string) int {
+	return Conf.GetInt(key)
 }
