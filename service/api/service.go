@@ -25,9 +25,9 @@ func ServiceRegister(group *gin.RouterGroup) {
 // @Description 获取服务列表
 // @Tags 服务管理接口
 // @Security ApiKeyAuth
-// @ID /service/list
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
 // @Param info query string false "关键词"
 // @Param page_no query int true "页数"
 // @Param page_size query int true "每页条数"
@@ -76,9 +76,9 @@ func (s *ServiceApi) ServiceList(ctx *gin.Context) {
 // @Description 获取服务信息
 // @Tags 服务管理接口
 // @Security ApiKeyAuth
-// @ID /service/{id}
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
 // @Param id path int true "ID"
 // @Success 200 {object} public.Response{data=models.ServiceDetail} "success"
 // @Router /service/{id} [get]
@@ -110,9 +110,9 @@ func (s *ServiceApi) ServiceDetail(ctx *gin.Context) {
 // @Description 删除服务
 // @Tags 服务管理接口
 // @Security ApiKeyAuth
-// @ID /service/{id}
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
 // @Param id path int true "ID"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /service/{id} [delete]
@@ -146,9 +146,9 @@ func (s *ServiceApi) ServiceDelete(ctx *gin.Context) {
 // @Description 添加HTTP服务
 // @Tags 服务管理接口
 // @Security ApiKeyAuth
-// @ID /service/service_add_http
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
 // @Param data body schemas.ServiceAddHTTPInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /service/service_add_http [post]
@@ -214,9 +214,9 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 // @Description 修改HTTP服务
 // @Tags 服务管理接口
 // @Security ApiKeyAuth
-// @ID /service/service_update_http
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
 // @Param data body schemas.ServiceUpdateHTTPInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
 // @Router /service/service_update_http [post]

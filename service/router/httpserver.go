@@ -38,5 +38,5 @@ func HttpServerStop() {
 	if err := HttpSrvHandler.Shutdown(ctx); err != nil {
 		zap.S().Fatalf(" [ERROR] HttpServerStop err:%v\n", err)
 	}
-	zap.S().Infof(" [INFO] HttpServerStop stopped\n")
+	zap.S().Infof(" [INFO] HttpServerStop %v stopped\n", config.BaseConfig.Http.Addr)
 }

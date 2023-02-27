@@ -191,8 +191,12 @@ paths:
       consumes:
       - application/json
       description: 删除用户
-      operationId: /admin/{id}
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: Account ID
         in: path
         name: id
@@ -220,8 +224,12 @@ paths:
       consumes:
       - application/json
       description: 修改密码
-      operationId: /admin/change_pwd
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: body
         in: body
         name: data
@@ -250,7 +258,12 @@ paths:
       consumes:
       - application/json
       description: 管理员信息
-      operationId: /admin/info
+      parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -273,7 +286,6 @@ paths:
       consumes:
       - application/json
       description: 管理员登录
-      operationId: /admin_login/login
       parameters:
       - description: body
         in: body
@@ -301,7 +313,6 @@ paths:
       consumes:
       - application/json
       description: 管理员注册
-      operationId: /admin_login/register
       parameters:
       - description: body
         in: body
@@ -329,8 +340,12 @@ paths:
       consumes:
       - application/json
       description: 删除服务
-      operationId: /service/{id}
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -357,8 +372,12 @@ paths:
       consumes:
       - application/json
       description: 获取服务信息
-      operationId: /service/{id}
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -386,8 +405,12 @@ paths:
       consumes:
       - application/json
       description: 获取服务列表
-      operationId: /service/list
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: 关键词
         in: query
         name: info
@@ -424,8 +447,12 @@ paths:
       consumes:
       - application/json
       description: 添加HTTP服务
-      operationId: /service/service_add_http
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: body
         in: body
         name: data
@@ -454,8 +481,12 @@ paths:
       consumes:
       - application/json
       description: 修改HTTP服务
-      operationId: /service/service_update_http
       parameters:
+      - description: Bearer JWT
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: body
         in: body
         name: data
@@ -479,4 +510,9 @@ paths:
       summary: 修改HTTP服务
       tags:
       - 服务管理接口
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

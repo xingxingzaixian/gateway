@@ -33,8 +33,14 @@ const docTemplate = `{
                     "管理员接口"
                 ],
                 "summary": "修改密码",
-                "operationId": "/admin/change_pwd",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "body",
                         "name": "data",
@@ -85,7 +91,15 @@ const docTemplate = `{
                     "管理员接口"
                 ],
                 "summary": "管理员信息",
-                "operationId": "/admin/info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "success",
@@ -126,8 +140,14 @@ const docTemplate = `{
                     "管理员接口"
                 ],
                 "summary": "删除用户",
-                "operationId": "/admin/{id}",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Account ID",
@@ -171,7 +191,6 @@ const docTemplate = `{
                     "管理员接口"
                 ],
                 "summary": "管理员登录",
-                "operationId": "/admin_login/login",
                 "parameters": [
                     {
                         "description": "body",
@@ -218,7 +237,6 @@ const docTemplate = `{
                     "管理员接口"
                 ],
                 "summary": "管理员注册",
-                "operationId": "/admin_login/register",
                 "parameters": [
                     {
                         "description": "body",
@@ -270,8 +288,14 @@ const docTemplate = `{
                     "服务管理接口"
                 ],
                 "summary": "获取服务列表",
-                "operationId": "/service/list",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "关键词",
@@ -333,8 +357,14 @@ const docTemplate = `{
                     "服务管理接口"
                 ],
                 "summary": "添加HTTP服务",
-                "operationId": "/service/service_add_http",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "body",
                         "name": "data",
@@ -385,8 +415,14 @@ const docTemplate = `{
                     "服务管理接口"
                 ],
                 "summary": "修改HTTP服务",
-                "operationId": "/service/service_update_http",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "body",
                         "name": "data",
@@ -437,8 +473,14 @@ const docTemplate = `{
                     "服务管理接口"
                 ],
                 "summary": "获取服务信息",
-                "operationId": "/service/{id}",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "ID",
@@ -485,8 +527,14 @@ const docTemplate = `{
                     "服务管理接口"
                 ],
                 "summary": "删除服务",
-                "operationId": "/service/{id}",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "ID",
@@ -778,6 +826,13 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

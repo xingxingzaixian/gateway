@@ -22,9 +22,8 @@ func AdminLoginRegister(group *gin.RouterGroup) {
 // @Summary 管理员登录
 // @Description 管理员登录
 // @Tags 管理员接口
-// @ID /admin_login/login
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
 // @Param data body schemas.AdminLoginInput true "body"
 // @Success 200 {object} public.Response{data=schemas.AdminLoginOutput} "success"
 // @Router /admin_login/login [post]
@@ -67,9 +66,8 @@ func (a *AdminLoginApi) AdminLogin(ctx *gin.Context) {
 // @Summary 管理员注册
 // @Description 管理员注册
 // @Tags 管理员接口
-// @ID /admin_login/register
-// @Accept json
-// @Produce json
+// @Accept application/json
+// @Produce application/json
 // @Param data body schemas.AdminRegisterInput true "body"
 // @Success 200 {object} public.Response{data=schemas.AdminRegisterInput} "success"
 // @Router /admin_login/register [post]

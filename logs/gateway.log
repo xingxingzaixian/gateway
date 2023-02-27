@@ -1,9 +1,0 @@
-{"level":"INFO","ts":"2023-02-27T10:41:43.827+0800","caller":"config/config.go:66","msg":"配置文件【./conf/config.yml】读取成功"}
-{"level":"INFO","ts":"2023-02-27T10:41:43.834+0800","caller":"config/config.go:67","msg":"配置信息：{debug Asia/Chongqing dga32gw4wfw4e454fdga34 my_sign_key {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
-{"level":"INFO","ts":"2023-02-27T10:41:43.859+0800","caller":"http_proxy_router/httpserver.go:53","msg":" [INFO] https_proxy_run :8443\n"}
-{"level":"INFO","ts":"2023-02-27T10:41:43.859+0800","caller":"http_proxy_router/httpserver.go:28","msg":" [INFO] http_proxy_run :8300\n"}
-{"level":"INFO","ts":"2023-02-27T10:41:43.860+0800","caller":"router/httpserver.go:28","msg":" [INFO] HttpServerRun::8200\n"}
-{"level":"INFO","ts":"2023-02-27T10:42:58.199+0800","caller":"http_proxy_router/httpserver.go:40","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
-{"level":"INFO","ts":"2023-02-27T10:42:58.199+0800","caller":"http_proxy_router/httpserver.go:66","msg":" [INFO] https_proxy_stop :8443 stopped\n"}
-{"level":"FATAL","ts":"2023-02-27T10:42:58.200+0800","caller":"router/httpserver.go:30","msg":" [ERROR] HttpServerRun::8200 err:http: Server closed\n"}
-{"level":"INFO","ts":"2023-02-27T10:42:58.200+0800","caller":"router/httpserver.go:41","msg":" [INFO] HttpServerStop stopped\n"}

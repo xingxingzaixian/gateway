@@ -26,6 +26,9 @@ func parseArgs() (*string, *string) {
 	return endpoint, config
 }
 
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	endpoint, config := parseArgs()
 
