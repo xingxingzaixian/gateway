@@ -28,6 +28,7 @@ func InitRouter(middlewares ...gin.HandlerFunc) *gin.Engine {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	serviceRouter := router.Group("/service")
+	serviceRouter.Use(middleware.JwtAuth())
 	{
 		api.ServiceRegister(serviceRouter)
 	}

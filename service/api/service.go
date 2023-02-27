@@ -195,13 +195,12 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 		return
 	}
 
-	tx.Commit()
-
 	// 添加服务到记录表中
 	models.ServiceManagerHandler.UpdateServiceMap(&models.ServiceDetail{
 		Info:     serviceInfo,
 		HTTPRule: httpRule,
 	})
+	tx.Commit()
 	public.ResponseSuccess(ctx, "添加服务成功")
 }
 
@@ -255,12 +254,12 @@ func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 		public.ResponseError(ctx, public.ServiceUpdateHTTPRuleSaveError, err)
 		return
 	}
-	tx.Commit()
 
 	// 添加服务到记录表中
 	models.ServiceManagerHandler.UpdateServiceMap(&models.ServiceDetail{
 		Info:     serviceInfo,
 		HTTPRule: httpRule,
 	})
+	tx.Commit()
 	public.ResponseSuccess(ctx, "更新服务成功")
 }

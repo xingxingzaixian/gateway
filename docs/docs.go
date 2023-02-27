@@ -35,13 +35,6 @@ const docTemplate = `{
                 "summary": "修改密码",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
                         "description": "body",
                         "name": "data",
                         "in": "body",
@@ -91,15 +84,6 @@ const docTemplate = `{
                     "管理员接口"
                 ],
                 "summary": "管理员信息",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "success",
@@ -141,13 +125,6 @@ const docTemplate = `{
                 ],
                 "summary": "删除用户",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "type": "integer",
                         "description": "Account ID",
@@ -291,13 +268,6 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
                         "description": "关键词",
                         "name": "info",
                         "in": "query"
@@ -359,13 +329,6 @@ const docTemplate = `{
                 "summary": "添加HTTP服务",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
                         "description": "body",
                         "name": "data",
                         "in": "body",
@@ -416,13 +379,6 @@ const docTemplate = `{
                 ],
                 "summary": "修改HTTP服务",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "description": "body",
                         "name": "data",
@@ -475,13 +431,6 @@ const docTemplate = `{
                 "summary": "获取服务信息",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
                         "type": "integer",
                         "description": "ID",
                         "name": "id",
@@ -528,13 +477,6 @@ const docTemplate = `{
                 ],
                 "summary": "删除服务",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bearer JWT",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "type": "integer",
                         "description": "ID",
@@ -677,17 +619,12 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "password",
-                "salt",
                 "username"
             ],
             "properties": {
                 "password": {
                     "type": "string",
                     "example": "123456"
-                },
-                "salt": {
-                    "type": "string",
-                    "example": "asdfas"
                 },
                 "username": {
                     "type": "string",

@@ -1,9 +1,9 @@
 package reverse_proxy
 
 import (
-	"fmt"
 	"gateway/models"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -24,11 +24,12 @@ func NewHttpReverseProxy(c *gin.Context, serviceDetail *models.ServiceDetail) *h
 		}
 
 		targetQuery := target.RawQuery
+		zap.S().Infof("before rewrite: %s", req.URL.String())
 		req.URL.Scheme = target.Scheme
 		req.URL.Host = target.Host
 		req.URL.Path = strings.Replace(req.URL.Path, serviceDetail.HTTPRule.Rule, target.Path, 1)
-		fmt.Println("1111 ===== ", req.URL)
 		req.Host = target.Host
+		zap.S().Infof("after rewrite: %s", req.URL.String())
 		if targetQuery == "" || req.URL.RawQuery == "" {
 			req.URL.RawQuery = targetQuery + req.URL.RawQuery
 		} else {

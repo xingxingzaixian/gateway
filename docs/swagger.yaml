@@ -74,15 +74,11 @@ definitions:
       password:
         example: "123456"
         type: string
-      salt:
-        example: asdfas
-        type: string
       username:
         example: admin
         type: string
     required:
     - password
-    - salt
     - username
     type: object
   schemas.ChangPwdInput:
@@ -192,11 +188,6 @@ paths:
       - application/json
       description: 删除用户
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: Account ID
         in: path
         name: id
@@ -225,11 +216,6 @@ paths:
       - application/json
       description: 修改密码
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: body
         in: body
         name: data
@@ -258,12 +244,6 @@ paths:
       consumes:
       - application/json
       description: 管理员信息
-      parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       produces:
       - application/json
       responses:
@@ -341,11 +321,6 @@ paths:
       - application/json
       description: 删除服务
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: ID
         in: path
         name: id
@@ -373,11 +348,6 @@ paths:
       - application/json
       description: 获取服务信息
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: ID
         in: path
         name: id
@@ -406,11 +376,6 @@ paths:
       - application/json
       description: 获取服务列表
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: 关键词
         in: query
         name: info
@@ -448,11 +413,6 @@ paths:
       - application/json
       description: 添加HTTP服务
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: body
         in: body
         name: data
@@ -482,11 +442,6 @@ paths:
       - application/json
       description: 修改HTTP服务
       parameters:
-      - description: Bearer JWT
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: body
         in: body
         name: data
