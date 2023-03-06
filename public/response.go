@@ -69,6 +69,7 @@ const (
 	AdminLoginUserOrPwdError
 	AdminLoginCreateTokenError
 	AdminRegisterParamInvalid
+	AdminRegisterSamePassword
 	AdminRegisterUserNotExist
 	AdminRegisterCreateUserError
 )

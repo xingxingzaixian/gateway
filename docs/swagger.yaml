@@ -44,11 +44,11 @@ definitions:
     type: object
   schemas.AdminInfoOutput:
     properties:
-      id:
-        type: integer
-      login_time:
+      nickName:
         type: string
-      name:
+      userId:
+        type: integer
+      userName:
         type: string
     type: object
   schemas.AdminLoginInput:
@@ -71,6 +71,12 @@ definitions:
     type: object
   schemas.AdminRegisterInput:
     properties:
+      confirmPwd:
+        example: "123456"
+        type: string
+      nickname:
+        example: 管理员
+        type: string
       password:
         example: "123456"
         type: string
@@ -78,6 +84,8 @@ definitions:
         example: admin
         type: string
     required:
+    - confirmPwd
+    - nickname
     - password
     - username
     type: object
@@ -126,14 +134,34 @@ definitions:
     properties:
       id:
         type: integer
+      need_websocket:
+        description: 是否支持websocket
+        example: 0
+        maximum: 1
+        minimum: 0
+        type: integer
+      rule:
+        description: 域名或者前缀
+        example: 类似/xxx/
+        type: string
       service_addr:
         type: string
       service_desc:
+        description: 服务描述
+        maxLength: 255
+        minLength: 1
         type: string
       service_name:
+        description: 服务名
         type: string
-      service_rewrite:
+      url_rewrite:
+        description: url重写功能
+        example: http://xx.xx.xx.xx:oo/
         type: string
+    required:
+    - rule
+    - service_desc
+    - service_name
     type: object
   schemas.ServiceListOutput:
     properties:
@@ -147,31 +175,31 @@ definitions:
   schemas.ServiceUpdateHTTPInput:
     properties:
       id:
-        description: 服务ID
+        description: "服务ID \t//header转换"
         example: 62
         minimum: 1
         type: integer
       need_websocket:
         description: 是否支持websocket
+        example: 0
         maximum: 1
         minimum: 0
         type: integer
       rule:
-        description: "域名或者前缀 \t//启用strip_uri"
-        example: /test_http_service_indb
+        description: 域名或者前缀
+        example: 类似/xxx/
         type: string
       service_desc:
         description: 服务描述
-        example: test_http_service_indb
         maxLength: 255
         minLength: 1
         type: string
       service_name:
         description: 服务名
-        example: test_http_service_indb
         type: string
       url_rewrite:
-        description: header转换
+        description: url重写功能
+        example: http://xx.xx.xx.xx:oo/
         type: string
     required:
     - id
@@ -182,7 +210,7 @@ definitions:
 info:
   contact: {}
 paths:
-  /admin/{id}:
+  /api/admin/{id}:
     delete:
       consumes:
       - application/json
@@ -210,7 +238,7 @@ paths:
       summary: 删除用户
       tags:
       - 管理员接口
-  /admin/change_pwd:
+  /api/admin/change_pwd:
     post:
       consumes:
       - application/json
@@ -239,7 +267,7 @@ paths:
       summary: 修改密码
       tags:
       - 管理员接口
-  /admin/info:
+  /api/admin/info:
     get:
       consumes:
       - application/json
@@ -261,7 +289,7 @@ paths:
       summary: 管理员信息
       tags:
       - 管理员接口
-  /admin_login/login:
+  /api/admin_login/login:
     post:
       consumes:
       - application/json
@@ -288,7 +316,7 @@ paths:
       summary: 管理员登录
       tags:
       - 管理员接口
-  /admin_login/register:
+  /api/admin_login/register:
     post:
       consumes:
       - application/json
@@ -315,7 +343,7 @@ paths:
       summary: 管理员注册
       tags:
       - 管理员接口
-  /service/{id}:
+  /api/service/{id}:
     delete:
       consumes:
       - application/json
@@ -370,7 +398,7 @@ paths:
       summary: 获取服务信息
       tags:
       - 服务管理接口
-  /service/list:
+  /api/service/list:
     get:
       consumes:
       - application/json
@@ -407,7 +435,7 @@ paths:
       summary: 获取服务列表
       tags:
       - 服务管理接口
-  /service/service_add_http:
+  /api/service/service_add_http:
     post:
       consumes:
       - application/json
@@ -436,7 +464,7 @@ paths:
       summary: 添加HTTP服务
       tags:
       - 服务管理接口
-  /service/service_update_http:
+  /api/service/service_update_http:
     post:
       consumes:
       - application/json

@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/admin/change_pwd": {
+        "/api/admin/change_pwd": {
             "post": {
                 "security": [
                     {
@@ -66,7 +66,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin/info": {
+        "/api/admin/info": {
             "get": {
                 "security": [
                     {
@@ -106,7 +106,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin/{id}": {
+        "/api/admin/{id}": {
             "delete": {
                 "security": [
                     {
@@ -155,7 +155,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin_login/login": {
+        "/api/admin_login/login": {
             "post": {
                 "description": "管理员登录",
                 "consumes": [
@@ -201,7 +201,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin_login/register": {
+        "/api/admin_login/register": {
             "post": {
                 "description": "管理员注册",
                 "consumes": [
@@ -247,7 +247,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/service/list": {
+        "/api/service/list": {
             "get": {
                 "security": [
                     {
@@ -309,7 +309,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/service/service_add_http": {
+        "/api/service/service_add_http": {
             "post": {
                 "security": [
                     {
@@ -360,7 +360,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/service/service_update_http": {
+        "/api/service/service_update_http": {
             "post": {
                 "security": [
                     {
@@ -411,7 +411,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/service/{id}": {
+        "/api/service/{id}": {
             "get": {
                 "security": [
                     {
@@ -578,13 +578,13 @@ const docTemplate = `{
         "schemas.AdminInfoOutput": {
             "type": "object",
             "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "login_time": {
+                "nickName": {
                     "type": "string"
                 },
-                "name": {
+                "userId": {
+                    "type": "integer"
+                },
+                "userName": {
                     "type": "string"
                 }
             }
@@ -618,10 +618,20 @@ const docTemplate = `{
         "schemas.AdminRegisterInput": {
             "type": "object",
             "required": [
+                "confirmPwd",
+                "nickname",
                 "password",
                 "username"
             ],
             "properties": {
+                "confirmPwd": {
+                    "type": "string",
+                    "example": "123456"
+                },
+                "nickname": {
+                    "type": "string",
+                    "example": "管理员"
+                },
                 "password": {
                     "type": "string",
                     "example": "123456"
@@ -688,21 +698,44 @@ const docTemplate = `{
         },
         "schemas.ServiceItemOutput": {
             "type": "object",
+            "required": [
+                "rule",
+                "service_desc",
+                "service_name"
+            ],
             "properties": {
                 "id": {
                     "type": "integer"
+                },
+                "need_websocket": {
+                    "description": "是否支持websocket",
+                    "type": "integer",
+                    "maximum": 1,
+                    "minimum": 0,
+                    "example": 0
+                },
+                "rule": {
+                    "description": "域名或者前缀",
+                    "type": "string",
+                    "example": "类似/xxx/"
                 },
                 "service_addr": {
                     "type": "string"
                 },
                 "service_desc": {
-                    "type": "string"
+                    "description": "服务描述",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
                 },
                 "service_name": {
+                    "description": "服务名",
                     "type": "string"
                 },
-                "service_rewrite": {
-                    "type": "string"
+                "url_rewrite": {
+                    "description": "url重写功能",
+                    "type": "string",
+                    "example": "http://xx.xx.xx.xx:oo/"
                 }
             }
         },
@@ -730,7 +763,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "id": {
-                    "description": "服务ID",
+                    "description": "服务ID \t//header转换",
                     "type": "integer",
                     "minimum": 1,
                     "example": 62
@@ -739,28 +772,28 @@ const docTemplate = `{
                     "description": "是否支持websocket",
                     "type": "integer",
                     "maximum": 1,
-                    "minimum": 0
+                    "minimum": 0,
+                    "example": 0
                 },
                 "rule": {
-                    "description": "域名或者前缀 \t//启用strip_uri",
+                    "description": "域名或者前缀",
                     "type": "string",
-                    "example": "/test_http_service_indb"
+                    "example": "类似/xxx/"
                 },
                 "service_desc": {
                     "description": "服务描述",
                     "type": "string",
                     "maxLength": 255,
-                    "minLength": 1,
-                    "example": "test_http_service_indb"
+                    "minLength": 1
                 },
                 "service_name": {
                     "description": "服务名",
-                    "type": "string",
-                    "example": "test_http_service_indb"
+                    "type": "string"
                 },
                 "url_rewrite": {
-                    "description": "header转换",
-                    "type": "string"
+                    "description": "url重写功能",
+                    "type": "string",
+                    "example": "http://xx.xx.xx.xx:oo/"
                 }
             }
         }

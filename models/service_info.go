@@ -79,9 +79,8 @@ func (s *ServiceInfo) ServiceDetail(c *gin.Context, tx *gorm.DB, search *Service
 		search = info
 	}
 
-	detail := &ServiceDetail{
-		Info: search,
-	}
+	detail := &ServiceDetail{}
+	detail.Info = search
 
 	httpRule := &HttpRule{ServiceID: search.ID}
 	httpRule, err := httpRule.Find(c, tx, httpRule)

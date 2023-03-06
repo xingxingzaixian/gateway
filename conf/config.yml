@@ -12,7 +12,7 @@ http:
 swagger:
   title: "go_gateway swagger API"
   desc: "This is a sample server celler server."
-  host: "127.0.0.1:8200"
+  host: "192.168.10.213:8200"
   base_path: ""
 
 mysql:
@@ -38,8 +38,8 @@ proxy:
     cert_key_file: "D:/OpenSourceCode/proxy/conf/server.key"
 
 web:
-  url: "/pc"
-  path: "D:/workcode/big-screen/big-frontend/dist"
+  url: "/ifc"
+  path: "D:/OpenSourceCode/gateway-admin/dist"
   addr: ":8400"
   read_timeout: 10
   write_timeout: 10

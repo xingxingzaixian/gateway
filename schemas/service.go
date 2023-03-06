@@ -29,11 +29,9 @@ func (param *ServiceAddHTTPInput) BindValidParam(c *gin.Context) error {
 }
 
 type ServiceItemOutput struct {
-	ID             uint64 `json:"id" form:"id"`
-	ServiceName    string `json:"service_name" form:"service_name"`
-	ServiceDesc    string `json:"service_desc" form:"service_desc"`
-	ServiceAddr    string `json:"service_addr" form:"service_addr"`
-	ServiceRewrite string `json:"service_rewrite" form:"service_rewrite"`
+	ServiceAddHTTPInput
+	ID          uint64 `json:"id" form:"id"`
+	ServiceAddr string `json:"service_addr" form:"service_addr"`
 }
 
 type ServiceListOutput struct {
@@ -42,13 +40,8 @@ type ServiceListOutput struct {
 }
 
 type ServiceUpdateHTTPInput struct {
-	ID          int64  `json:"id" form:"id" comment:"服务ID" example:"62" validate:"required,min=1"`                                                     //服务ID
-	ServiceName string `json:"service_name" form:"service_name" comment:"服务名" example:"test_http_service_indb" validate:"required,valid_service_name"` //服务名
-	ServiceDesc string `json:"service_desc" form:"service_desc" comment:"服务描述" example:"test_http_service_indb" validate:"required,max=255,min=1"`     //服务描述
-
-	Rule          string `json:"rule" form:"rule" comment:"接入路径：域名或者前缀" example:"/test_http_service_indb" validate:"required"` //域名或者前缀 	//启用strip_uri
-	NeedWebsocket int    `json:"need_websocket" form:"need_websocket" comment:"是否支持websocket" validate:"max=1,min=0"`          //是否支持websocket
-	UrlRewrite    string `json:"url_rewrite" form:"url_rewrite" comment:"url重写功能"`                                             //header转换
+	ServiceAddHTTPInput
+	ID int64 `json:"id" form:"id" comment:"服务ID" example:"62" validate:"required,min=1"` //服务ID 	//header转换
 }
 
 func (param *ServiceUpdateHTTPInput) BindValidParam(c *gin.Context) error {

@@ -3,13 +3,12 @@ package schemas
 import (
 	"gateway/public"
 	"github.com/gin-gonic/gin"
-	"time"
 )
 
 type AdminInfoOutput struct {
-	ID        uint64    `json:"id"`
-	Name      string    `json:"name"`
-	LoginTime time.Time `json:"login_time"`
+	ID       uint64 `json:"userId"`
+	UserName string `json:"userName"`
+	NickName string `json:"nickName"`
 }
 
 type ChangPwdInput struct {

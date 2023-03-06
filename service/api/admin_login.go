@@ -26,7 +26,7 @@ func AdminLoginRegister(group *gin.RouterGroup) {
 // @Produce application/json
 // @Param data body schemas.AdminLoginInput true "body"
 // @Success 200 {object} public.Response{data=schemas.AdminLoginOutput} "success"
-// @Router /admin_login/login [post]
+// @Router /api/admin_login/login [post]
 func (a *AdminLoginApi) AdminLogin(ctx *gin.Context) {
 	params := &schemas.AdminLoginInput{}
 	if err := params.BindValidParam(ctx); err != nil {
@@ -70,11 +70,17 @@ func (a *AdminLoginApi) AdminLogin(ctx *gin.Context) {
 // @Produce application/json
 // @Param data body schemas.AdminRegisterInput true "body"
 // @Success 200 {object} public.Response{data=schemas.AdminRegisterInput} "success"
-// @Router /admin_login/register [post]
+// @Router /api/admin_login/register [post]
 func (a *AdminLoginApi) AdminRegister(ctx *gin.Context) {
 	params := &schemas.AdminRegisterInput{}
 	if err := params.BindValidParam(ctx); err != nil {
 		public.ResponseError(ctx, public.AdminRegisterParamInvalid, err)
+		return
+	}
+
+	// 0. 密码必须相同
+	if params.Password != params.ConfirmPwd {
+		public.ResponseError(ctx, public.AdminRegisterSamePassword, errors.New("两次密码必须一致"))
 		return
 	}
 
@@ -88,6 +94,7 @@ func (a *AdminLoginApi) AdminRegister(ctx *gin.Context) {
 
 	newAdmin := models.Admin{}
 	newAdmin.UserName = params.UserName
+	newAdmin.NickName = params.NickName
 	newAdmin.Password = public.GenSaltPassword(params.Password)
 	if err = newAdmin.Save(ctx, public.GormDB); err != nil {
 		public.ResponseError(ctx, public.AdminRegisterCreateUserError, err)

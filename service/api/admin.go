@@ -26,13 +26,13 @@ func AdminRegister(group *gin.RouterGroup) {
 // @Accept application/json
 // @Produce application/json
 // @Success 200 {object} public.Response{data=schemas.AdminInfoOutput} "success"
-// @Router /admin/info [get]
+// @Router /api/admin/info [get]
 func (a *AdminApi) AdminInfo(ctx *gin.Context) {
 	user, _ := ctx.Get("user")
 	out := &schemas.AdminInfoOutput{
-		ID:        uint64(user.(*models.Admin).ID),
-		Name:      user.(*models.Admin).UserName,
-		LoginTime: user.(*models.Admin).UpdatedAt,
+		ID:       uint64(user.(*models.Admin).ID),
+		UserName: user.(*models.Admin).UserName,
+		NickName: user.(*models.Admin).NickName,
 	}
 	public.ResponseSuccess(ctx, out)
 }
@@ -46,7 +46,7 @@ func (a *AdminApi) AdminInfo(ctx *gin.Context) {
 // @Produce application/json
 // @Param data body schemas.ChangPwdInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
-// @Router /admin/change_pwd [post]
+// @Router /api/admin/change_pwd [post]
 func (a *AdminApi) ChangePwd(ctx *gin.Context) {
 	params := &schemas.ChangPwdInput{}
 	if err := params.BindValidParam(ctx); err != nil {
@@ -81,7 +81,7 @@ func (a *AdminApi) ChangePwd(ctx *gin.Context) {
 // @Produce application/json
 // @Param id  path int true "Account ID"
 // @Success 200 {object} public.Response{data=string} "success"
-// @Router /admin/{id} [delete]
+// @Router /api/admin/{id} [delete]
 func (a *AdminApi) DeleteUser(ctx *gin.Context) {
 	id := ctx.Param("id")
 	userId, err := strconv.Atoi(id)

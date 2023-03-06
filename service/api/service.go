@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+	"gateway/lib/config"
 	"gateway/models"
 	"gateway/public"
 	"gateway/schemas"
@@ -31,7 +33,7 @@ func ServiceRegister(group *gin.RouterGroup) {
 // @Param page_no query int true "页数"
 // @Param page_size query int true "每页条数"
 // @Success 200 {object} public.Response{data=schemas.ServiceListOutput} "success"
-// @Router /service/list [get]
+// @Router /api/service/list [get]
 func (s *ServiceApi) ServiceList(ctx *gin.Context) {
 	params := &schemas.ServiceListInput{}
 	if err := params.BindValidParam(ctx); err != nil {
@@ -54,13 +56,22 @@ func (s *ServiceApi) ServiceList(ctx *gin.Context) {
 			return
 		}
 
-		itemList = append(itemList, schemas.ServiceItemOutput{
-			ID:             uint64(item.ID),
-			ServiceName:    item.ServiceName,
-			ServiceDesc:    item.ServiceDesc,
-			ServiceAddr:    serviceDetail.HTTPRule.Rule,
-			ServiceRewrite: serviceDetail.HTTPRule.UrlRewrite,
-		})
+		data := schemas.ServiceItemOutput{
+			ID: uint64(item.ID),
+		}
+		data.ServiceName = item.ServiceName
+		data.ServiceDesc = item.ServiceDesc
+
+		proxyHttpAddr := config.GetStringConf("proxy.http.addr")
+		serviceAddr := "unknow"
+		if serviceDetail.HTTPRule != nil {
+			serviceAddr = fmt.Sprintf("%s%s", proxyHttpAddr, serviceDetail.HTTPRule.Rule)
+			data.ServiceAddr = serviceAddr
+			data.Rule = serviceDetail.HTTPRule.Rule
+			data.UrlRewrite = serviceDetail.HTTPRule.UrlRewrite
+			data.NeedWebsocket = serviceDetail.HTTPRule.NeedWebsocket
+		}
+		itemList = append(itemList, data)
 	}
 
 	out := &schemas.ServiceListOutput{
@@ -79,7 +90,7 @@ func (s *ServiceApi) ServiceList(ctx *gin.Context) {
 // @Produce application/json
 // @Param id path int true "ID"
 // @Success 200 {object} public.Response{data=models.ServiceDetail} "success"
-// @Router /service/{id} [get]
+// @Router /api/service/{id} [get]
 func (s *ServiceApi) ServiceDetail(ctx *gin.Context) {
 	id := ctx.Param("id")
 	serviceId, err := strconv.Atoi(id)
@@ -112,7 +123,7 @@ func (s *ServiceApi) ServiceDetail(ctx *gin.Context) {
 // @Produce application/json
 // @Param id path int true "ID"
 // @Success 200 {object} public.Response{data=string} "success"
-// @Router /service/{id} [delete]
+// @Router /api/service/{id} [delete]
 func (s *ServiceApi) ServiceDelete(ctx *gin.Context) {
 	id := ctx.Param("id")
 	serviceId, err := strconv.Atoi(id)
@@ -147,7 +158,7 @@ func (s *ServiceApi) ServiceDelete(ctx *gin.Context) {
 // @Produce application/json
 // @Param data body schemas.ServiceAddHTTPInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
-// @Router /service/service_add_http [post]
+// @Router /api/service/service_add_http [post]
 func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 	params := &schemas.ServiceAddHTTPInput{}
 	if err := params.BindValidParam(ctx); err != nil {
@@ -213,7 +224,7 @@ func (s *ServiceApi) ServiceAddHTTP(ctx *gin.Context) {
 // @Produce application/json
 // @Param data body schemas.ServiceUpdateHTTPInput true "body"
 // @Success 200 {object} public.Response{data=string} "success"
-// @Router /service/service_update_http [post]
+// @Router /api/service/service_update_http [post]
 func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 	params := &schemas.ServiceUpdateHTTPInput{}
 	if err := params.BindValidParam(ctx); err != nil {
@@ -246,9 +257,16 @@ func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 		return
 	}
 
-	httpRule := serviceDetail.HTTPRule
+	httpRule := models.HttpRule{}
+	if serviceDetail.HTTPRule != nil {
+		httpRule.ID = serviceDetail.HTTPRule.ID
+		httpRule.ServiceID = serviceDetail.HTTPRule.ServiceID
+	} else {
+		httpRule.ServiceID = serviceDetail.Info.ID
+	}
 	httpRule.NeedWebsocket = params.NeedWebsocket
 	httpRule.UrlRewrite = params.UrlRewrite
+	httpRule.Rule = params.Rule
 	if err := httpRule.Save(ctx, tx); err != nil {
 		tx.Rollback()
 		public.ResponseError(ctx, public.ServiceUpdateHTTPRuleSaveError, err)
@@ -258,7 +276,7 @@ func (s *ServiceApi) ServiceUpdateHTTP(ctx *gin.Context) {
 	// 添加服务到记录表中
 	models.ServiceManagerHandler.UpdateServiceMap(&models.ServiceDetail{
 		Info:     serviceInfo,
-		HTTPRule: httpRule,
+		HTTPRule: &httpRule,
 	})
 	tx.Commit()
 	public.ResponseSuccess(ctx, "更新服务成功")
