@@ -249,3 +249,36 @@
 {"level":"INFO","ts":"2023-02-23T17:42:02.499+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
 {"level":"INFO","ts":"2023-02-23T17:42:02.524+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
 {"level":"INFO","ts":"2023-02-23T17:42:09.807+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T12:55:59.929+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T12:55:59.952+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T12:56:00.097+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"ERROR","ts":"2023-02-24T12:56:21.967+0800","caller":"http_proxy_middleware/http_access_mode.go:16","msg":"not matched service"}
+{"level":"INFO","ts":"2023-02-24T12:57:33.820+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T12:57:37.372+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T12:57:37.380+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T12:57:37.404+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T12:58:14.605+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T13:41:47.255+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T13:41:47.279+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T13:41:47.305+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T15:00:04.096+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T15:00:07.450+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T15:00:07.457+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T15:00:07.488+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T15:01:46.383+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T15:01:49.458+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T15:01:49.465+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T15:01:49.486+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T15:02:41.081+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T15:25:24.212+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T15:25:24.220+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T15:25:24.254+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T15:27:25.344+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-02-24T15:27:39.848+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-02-24T15:27:39.855+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-02-24T15:27:39.877+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-02-24T15:28:13.107+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}
+{"level":"INFO","ts":"2023-03-31T22:55:21.244+0800","caller":"config/config.go:68","msg":"配置文件【./conf/config.yml】读取成功"}
+{"level":"INFO","ts":"2023-03-31T22:55:21.252+0800","caller":"config/config.go:69","msg":"配置信息：{debug Asia/Chongqing {go_gateway swagger API This is a sample server celler server. 127.0.0.1:8200 } {localhost 3306 gateway root 123456} {:8300 10 10 20} {/pc D:/workcode/big-screen/big-frontend/dist :8400 10 10 20} {:8200 10 10 20}}"}
+{"level":"INFO","ts":"2023-03-31T22:55:22.878+0800","caller":"http_proxy_router/httpserver.go:25","msg":" [INFO] http_proxy_run :8300\n"}
+{"level":"INFO","ts":"2023-04-01T08:33:17.143+0800","caller":"http_proxy_router/httpserver.go:37","msg":" [INFO] http_proxy_stop :8300 stopped\n"}

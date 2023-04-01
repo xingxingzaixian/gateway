@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"gateway/public"
 	"gateway/schemas"
 	"github.com/gin-gonic/gin"
@@ -46,7 +45,7 @@ func (s *ServiceManager) HTTPAccessMode(c *gin.Context) (*ServiceDetail, error) 
 	var serviceDetail *ServiceDetail
 	s.ServiceMap.Range(func(key, serviceItem any) bool {
 		service := serviceItem.(*ServiceDetail)
-		fmt.Println("222: ", path, service.HTTPRule.Rule)
+
 		if strings.HasPrefix(path, service.HTTPRule.Rule) {
 			serviceDetail = service
 			return false

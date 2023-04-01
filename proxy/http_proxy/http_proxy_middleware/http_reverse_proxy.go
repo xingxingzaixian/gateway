@@ -2,7 +2,7 @@ package http_proxy_middleware
 
 import (
 	"gateway/models"
-	"gateway/proxy/http_proxy/reverse_proxy"
+	"gateway/proxy/reverse_proxy"
 	"gateway/public"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
